@@ -1,9 +1,9 @@
 # Next.js_onebite
-## Title : 한입 FE 챌린지 2기
+### Title : 한입 FE 챌린지 2기
 
-### Subject: Next.js, Vercel
+#### Subject: Next.js, Vercel
 
-### Date : 2024/09/09 ~ 2024/10/05
+#### Date : 2024/09/09 ~ 2024/10/05
 
 
 [한 입 크기로 잘라먹는 Next.js(15+) 강의 | 이정환 Winterlood - 인프런](https://www.inflearn.com/course/한입-크기-nextjs?inst=da2b1b33&utm_source=instructor&utm_medium=referral&utm_campaign=inflearn_트래픽_promotion-link)
