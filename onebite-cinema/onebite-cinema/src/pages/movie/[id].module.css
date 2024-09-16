@@ -55,3 +55,7 @@
 .container .info_container .description {
     line-height: 1.5;
 }
+
+.container .gray{
+    color: gray;
+}

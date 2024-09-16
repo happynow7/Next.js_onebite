@@ -58,7 +58,7 @@ export default function Page({movie}: InferGetServerSidePropsType<typeof getServ
                     <div>
                         {releaseDate} / {genres.join(", ")} / {runtime}분
                     </div>
-                    <div>{company}</div>
+                    <div className={style.gray}>{company}</div>
                 </div>
 
                 <div>
