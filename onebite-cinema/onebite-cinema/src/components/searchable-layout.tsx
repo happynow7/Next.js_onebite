@@ -33,8 +33,8 @@ export default function SearchableLayout({children}: {
             <div className={style.searchbar_container}>
                 <input
                     value={search}
-                    onChange={onChangeSearch}
                     onKeyDown={onKeyDown}
+                    onChange={onChangeSearch}
                     placeholder="검색어를 입력해 주세요."
                 />
                 <button onClick={onSubmit}>검색</button>
