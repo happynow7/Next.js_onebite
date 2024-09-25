@@ -1,13 +1,14 @@
 import {
-    GetServerSidePropsContext,
-    InferGetServerSidePropsType,
+    GetServerSidePropsContext, GetStaticPropsContext,
+    InferGetServerSidePropsType, InferGetStaticPropsType,
 } from "next";
 import style from "./[id].module.css";
 import { useRouter } from "next/router";
 import fetchDetailMovie from "@/lib/fetch-detail-movie";
+import {getStaticProps} from "@/pages";
 
-export const getServerSideProps = async (
-    context: GetServerSidePropsContext
+export const getStaticProps = async (
+    context: GetStaticPropsContext
 ) => {
     const id = context.params!.id;
     const movie = await fetchDetailMovie(Number(id));
@@ -25,7 +26,7 @@ export const getServerSideProps = async (
     };
 };
 
-export default function Page({movie}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Page({movie}: InferGetStaticPropsType<typeof getStaticProps>) {
     const router = useRouter();
 
     if (router.isFallback) return "Loading";
