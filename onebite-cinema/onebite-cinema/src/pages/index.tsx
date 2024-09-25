@@ -35,7 +35,7 @@ export default function Home({allMovies, recoMovies}: InferGetStaticPropsType<ty
                 <h3>등록된 모든 영화</h3>
                 <div className={style.all_container}>
                     {allMovies.map((movie) => (
-                        <MovieItem key={`recomovie-${movie.id}`} {...movie} />
+                        <MovieItem key={`allmovie-${movie.id}`} {...movie} />
                     ))}
                 </div>
             </section>
