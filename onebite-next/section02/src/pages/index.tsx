@@ -25,7 +25,6 @@ export const getStaticProps = async()=>{
             allBooks,
             recoBooks
         }
-
     }
 }
 
