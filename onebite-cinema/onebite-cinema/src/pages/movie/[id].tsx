@@ -5,7 +5,25 @@ import {
 import style from "./[id].module.css";
 import { useRouter } from "next/router";
 import fetchDetailMovie from "@/lib/fetch-detail-movie";
-import {getStaticProps} from "@/pages";
+import fetchMovies from "@/lib/fetch-movie";
+
+export const getStaticPaths = async() => {
+    const movies = await fetchMovies();
+    // return{
+    //     paths:[
+    //
+    //     ],
+    //     fallback:true
+    // }
+    const paths = movies.map((movie: { id: number }) => ({
+        params: { id: movie.id.toString() }, // id는 문자열이어야 합니다.
+    }));
+
+    return {
+        paths,
+        fallback: true
+    }
+}
 
 export const getStaticProps = async (
     context: GetStaticPropsContext
