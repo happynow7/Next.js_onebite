@@ -17,6 +17,7 @@ export const getStaticProps = async () => {
             allMovies,
             recoMovies,
         },
+        revalidate: 5,
     };
 };
 
