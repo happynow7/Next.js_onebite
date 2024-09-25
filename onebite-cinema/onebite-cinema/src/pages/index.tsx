@@ -33,11 +33,11 @@ export default function Home({allMovies, recoMovies}: InferGetStaticPropsType<ty
                 />
                 <meta
                     property='og:title'
-                    content='한입시네마'
+                    content='한입 씨네마'
                 />
                 <meta
                     property='og:description'
-                    content='한입 시네마에 등록된 영화들을 만나보세요~!'
+                    content='한입 씨네마에 등록된 영화들을 만나보세요~!'
                 />
             </Head>
         <div className={style.conatiner}>
