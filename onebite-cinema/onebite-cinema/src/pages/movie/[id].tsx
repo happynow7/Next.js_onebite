@@ -1,7 +1,4 @@
-import {
-    GetServerSidePropsContext, GetStaticPropsContext,
-    InferGetServerSidePropsType, InferGetStaticPropsType,
-} from "next";
+import {GetStaticPropsContext, InferGetStaticPropsType} from "next";
 import style from "./[id].module.css";
 import { useRouter } from "next/router";
 import fetchDetailMovie from "@/lib/fetch-detail-movie";
@@ -68,7 +65,6 @@ export default function Page({movie}: InferGetStaticPropsType<typeof getStaticPr
     if (!movie) return "Loading Failed..";
 
     const {
-        id,
         title,
         subTitle,
         company,
