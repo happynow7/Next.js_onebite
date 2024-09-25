@@ -4,43 +4,26 @@ import fetchMovies from "@/lib/fetch-movie";
 import { ReactNode, useEffect, useState } from "react";
 import MovieItem from "@/components/movie-item";
 import style from "./search.module.css";
-import movies from "@/mock/dummy.json";
-import {GetServerSidePropsContext} from "next";
-import {InferGetServerSidePropsType} from "next";
+import {InferGetServerSidePropsType, GetServerSidePropsContext} from "next";
 
 
-export const getServerSideProps = async (
-    context: GetServerSidePropsContext
-) => {
-    const q = context.query.q;
-    const movies = await fetchMovies(q as string);
-
-    return {
-        props: {
-            movies,
-        },
-    };
-};
-
-export default function Page({movies}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Page() {
     const router = useRouter();
-    const [filteredMovies, setFilteredMovies] = useState(movies);
+    const {q} = router.query;
+    const [movies, setMovies] = useState<MovieData[]>([]);
+
 
     useEffect(() => {
-        const q = router.query.q as string;
-        if (q) {
-            const filtered = movies.filter(movie =>
-                movie.title.toLowerCase().includes(q.toLowerCase())
-            );
-            setFilteredMovies(filtered);
-        } else {
-            setFilteredMovies(movies);
-        }
-    }, [router.query.q]);
+        const fetchSearchResult = async () => {
+            const data = await fetchMovies(q as string);
+            setMovies(data);
+        };
+        if (q) fetchSearchResult();
+    },[q]);
 
     return (
         <div className={style.container}>
-            {filteredMovies.map((movie) => (
+            {movies.map((movie) => (
                 <MovieItem key={movie.id} {...movie} />
             ))}
         </div>
