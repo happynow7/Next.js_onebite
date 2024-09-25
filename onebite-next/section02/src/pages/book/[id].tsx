@@ -1,6 +1,6 @@
 import style from "./[id].module.css";
 import fetchOneBook from "@/lib/fetch-one-book";
-import {InferGetServerSidePropsType} from "next";
+import {GetStaticPropsContext, InferGetServerSidePropsType, InferGetStaticPropsType} from "next";
 
 const mockData = {
     id: 1,
@@ -14,7 +14,18 @@ const mockData = {
         "https://shopping-phinf.pstatic.net/main_3888828/38888282618.20230913071643.jpg",
 };
 
-export const getServerSideProps=async (context: getServerSidePropsContext) =>{
+export const getStaticPaths = ()=>{
+    return{
+        paths:[
+            {params:{id:"1"}},
+            {params:{id:"2"}},
+            {params:{id:"3"}},
+        ],
+        fallback : false,
+    }
+}
+
+export const getStaticProps=async (context: GetStaticPropsContext) =>{
     const id = context.params!.id;
     const book = await fetchOneBook(Number(id));
 
@@ -27,7 +38,7 @@ export const getServerSideProps=async (context: getServerSidePropsContext) =>{
     }
 }
 
-export default function Page({book}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Page({book}: InferGetStaticPropsType<typeof getStaticProps>) {
 
     if(!book) return "문제가 발생했습니다. 다시 시도하세요."
 
