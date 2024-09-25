@@ -5,9 +5,7 @@ import { ReactNode, useEffect, useState } from "react";
 import MovieItem from "@/components/movie-item";
 import style from "./search.module.css";
 import movies from "@/mock/dummy.json";
-import {GetServerSidePropsContext} from "next";
-import {InferGetServerSidePropsType} from "next";
-
+import {InferGetServerSidePropsType, GetServerSidePropsContext} from "next";
 
 export const getServerSideProps = async (
     context: GetServerSidePropsContext
