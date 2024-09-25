@@ -26,7 +26,7 @@ export default function Home({allMovies, recoMovies}: InferGetStaticPropsType<ty
     return (
         <>
             <Head>
-                <title>한입시네마</title>
+                <title>한입 씨네마</title>
                 <meta
                     property='og:image'
                     content='/thumbnail.png'

@@ -23,7 +23,7 @@ export default function Page() {
     return (
         <>
             <Head>
-                <title>한입시네마 - 검색결과</title>
+                <title>한입 씨네마 - 검색결과</title>
                 <meta
                     property='og:image'
                     content='/thumbnail.png'
