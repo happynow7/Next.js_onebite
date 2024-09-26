@@ -5,37 +5,39 @@ import { useRouter, useSearchParams } from "next/navigation";
 export default function Searchbar() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const [search, setSearch] = useState("");
-    const q = searchParams.get("q");
+    const [search, setSearch] = useState<string>("");
+
+    const q = searchParams.get("q") ?? "";
 
     useEffect(() => {
-        setSearch(q || "");
+        setSearch(q);
     }, [q]);
 
-    const onChangeSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     };
 
-    const onSubmit = () => {
-        if (!search || q === search) return;
-        router.push(`/search?q=${ search }`);
+    const handleSearchSubmit = () => {
+        if (!search.trim() || search === q) return;
+        router.push(`/search?q=${encodeURIComponent(search)}`);
     };
 
-    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            onSubmit();
+            handleSearchSubmit();
         }
     };
 
     return (
         <div>
             <input
-                onChange={onChangeSearch}
-                onKeyDown={onKeyDown}
+                type="text"
+                onChange={handleSearchChange}
+                onKeyDown={handleKeyDown}
                 value={search}
                 placeholder="검색어를 입력해주세요"
             />
-            <button onClick={onSubmit}>검색</button>
+            <button onClick={handleSearchSubmit}>검색</button>
         </div>
     );
 }
