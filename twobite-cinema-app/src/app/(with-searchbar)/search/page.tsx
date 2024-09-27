@@ -1,12 +1,13 @@
 import MovieItem from "../../../components/movie-item";
 import style from "./page.module.css";
+import {MovieData} from "@/types";
 
 export default async function Page({searchParams}:{searchParams: {q?:string}}) {
 
   const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${searchParams.q}`,
       {
-        cache: "force-cache",
+        cache: "force-cache"
       }
   );
   if (!response.ok) {
