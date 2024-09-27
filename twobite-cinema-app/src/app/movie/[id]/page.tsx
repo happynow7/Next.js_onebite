@@ -1,5 +1,4 @@
 import style from "./page.module.css";
-import movies from "../../../dummy.json";
 
 const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`,
