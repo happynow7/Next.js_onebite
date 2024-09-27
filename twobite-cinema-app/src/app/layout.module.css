@@ -15,3 +15,10 @@
   cursor: pointer;
   text-decoration: none;
 }
+
+.footer{
+  color: #6b6b6b;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}

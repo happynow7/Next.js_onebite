@@ -1,17 +1,34 @@
 import style from "./page.module.css";
+import {notFound} from "next/navigation";
+import { MovieData } from "@/types";
 
-const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`,
-    { cache: "force-cache" }
-);
+export const dynamicParams = false;
 
-if (!response.ok) {
-  return <div>오류가 발생했습니다...</div>;
+export async function generateStaticParams() {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`);
+  if (!response.ok) throw new Error("Fetch failed");
+
+  const movies: MovieData[] = await response.json();
+  return movies.map(({ id }) => ({ id: id.toString() }));
 }
 
-const movie = await response.json();
+export default async function Page({params}: {params: { id: string | string[] }}) {
 
-export default function Page() {
+  const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`,
+      { cache: "force-cache" }
+  );
+
+  if (!response.ok) {
+    if (response.status === 404){
+      notFound()
+    }
+    return <div>오류가 발생했습니다...</div>;
+  }
+
+  const movie: MovieData = await response.json();
+
+
   const {
     title,
     subTitle,
@@ -24,26 +41,26 @@ export default function Page() {
   } = movie;
 
   return (
-    <div className={style.container}>
-      <div
-        className={style.cover_img_container}
-        style={{ backgroundImage: `url('${posterImgUrl}')` }}
-      >
-        <img src={posterImgUrl} />
-      </div>
-      <div className={style.info_container}>
-        <div>
-          <h2>{title}</h2>
+      <div className={style.container}>
+        <div
+            className={style.cover_img_container}
+            style={{ backgroundImage: `url('${posterImgUrl}')` }}
+        >
+          <img src={posterImgUrl} />
+        </div>
+        <div className={style.info_container}>
           <div>
-            {releaseDate} / {genres.join(", ")} / {runtime}분
+            <h2>{title}</h2>
+            <div>
+              {releaseDate} / {genres.join(", ")} / {runtime}분
+            </div>
+            <div>{company}</div>
           </div>
-          <div>{company}</div>
-        </div>
-        <div>
-          <div className={style.subTitle}>{subTitle}</div>
-          <div className={style.description}>{description}</div>
+          <div>
+            <div className={style.subTitle}>{subTitle}</div>
+            <div className={style.description}>{description}</div>
+          </div>
         </div>
       </div>
-    </div>
   );
 }
