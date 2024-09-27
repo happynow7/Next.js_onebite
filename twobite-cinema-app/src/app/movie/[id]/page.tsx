@@ -1,9 +1,18 @@
 import style from "./page.module.css";
-import movies from "../../../dummy.json";
+
+const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/${params.id}`,
+    { cache: "force-cache" }
+);
+
+if (!response.ok) {
+  return <div>오류가 발생했습니다...</div>;
+}
+
+const movie = await response.json();
 
 export default function Page() {
   const {
-    id,
     title,
     subTitle,
     company,
@@ -12,7 +21,7 @@ export default function Page() {
     posterImgUrl,
     releaseDate,
     genres,
-  } = movies[3];
+  } = movie;
 
   return (
     <div className={style.container}>
