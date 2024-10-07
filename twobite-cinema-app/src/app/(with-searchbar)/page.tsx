@@ -1,8 +1,10 @@
 import MovieItem from "../../components/movie-item";
 import style from "./page.module.css";
 import {MovieData} from "@/types";
+import {delay} from "@/util/delay";
 
 async function AllMovies(){
+    await delay(1000);
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`, {cache: "force-cache"})
     if(!response.ok){
         return <div>오류가 발생했습니다..</div>
@@ -18,6 +20,7 @@ async function AllMovies(){
 }
 
 async function RecoMovies() {
+    await delay(500);
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/random`, { next:{revalidate:10} })
     if (!response.ok) {
         return <div>오류가 발생했습니다...</div>;
