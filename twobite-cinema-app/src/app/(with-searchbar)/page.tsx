@@ -1,13 +1,11 @@
 import MovieItem from "@/components/movie-item";
 import style from "./page.module.css";
 import { MovieData } from "@/types";
-import { delay } from "@/util/delay";
-import MovieItemSkeleton from "@/components/skeleton/movie-item-skeleton";
 import MovieListSkeleton from "@/components/skeleton/movie-list-skeleton";
 import { Suspense } from "react";
+import { Metadata } from "next";
 
 async function AllMovies() {
-    await delay(1000);
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie`, {
         cache: "force-cache",
@@ -23,7 +21,6 @@ async function AllMovies() {
 }
 
 async function RecoMovies() {
-    await delay(3000);
 
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/random`,
@@ -39,6 +36,16 @@ async function RecoMovies() {
     return recoMovies.map((movie) => (
         <MovieItem key={`reco-${movie.id}`} {...movie} />
     ));
+}
+
+export const metadata : Metadata={
+    title: "두입 씨네마",
+    description : "두입 씨네마에 등록된 영화를 만나보세요~!",
+    openGraph:{
+        title:"두입 씨네마",
+        description: "두입 씨네마에 등록된 영화를 만나보세요~!",
+        images: ["/thumbnail.png"],
+    }
 }
 
 export default function Home() {

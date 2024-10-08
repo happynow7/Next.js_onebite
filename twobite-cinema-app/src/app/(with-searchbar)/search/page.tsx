@@ -1,14 +1,12 @@
 import MovieItem from "../../../components/movie-item";
 import style from "./page.module.css";
 import {MovieData} from "@/types";
-import {delay} from "@/util/delay";
-import MovieItemSkeleton from "@/components/skeleton/movie-item-skeleton";
 import MovieListSkeleton from "@/components/skeleton/movie-list-skeleton";
 import {Suspense} from "react";
+import { Metadata } from "next";
 
 async function SearchResult({ q }: { q: string }) {
 
-  await delay(1000);
 
   const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/movie/search?q=${q}`,
@@ -27,10 +25,25 @@ async function SearchResult({ q }: { q: string }) {
   ));
 }
 
-export default async function Page({searchParams}: {searchParams: {
-    q?: string;
-  };
-}) {
+type Props = {
+    searchParams: {
+        q?: string;
+    };
+};
+
+export function generateMetadata({ searchParams }: Props): Metadata {
+    return {
+        title: `${searchParams.q} : 두입 씨네마 검색`,
+        description: `${searchParams.q} 검색 결과입니다`,
+        openGraph: {
+            title: `${searchParams.q} : 두입 씨네마 검색`,
+            description: `${searchParams.q} 검색 결과입니다`,
+            images: ["/thumbnail.png"],
+        },
+    };
+}
+
+export default async function Page({ searchParams }: Props) {
   return (
       <div className={style.container}>
         <Suspense
