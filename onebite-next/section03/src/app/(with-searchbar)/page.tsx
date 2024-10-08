@@ -36,7 +36,17 @@ async function RecoBooks (){
     </div>
 }
 
-// export const
+export const dynamic = "force-dynamic";
+
+export const metadata : Metadata={
+    title: "한입 북스",
+    description : "한입 북스에 등록된 도서를 만나보세요.",
+    openGraph:{
+        title:"한입 북스",
+        description: "한입 북스에 등록된 도서를 만나보세요.",
+        image: ["/thumbnail.png"],
+    }
+}
 
 export default function Home() {
   return (
