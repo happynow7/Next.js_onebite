@@ -38,21 +38,26 @@ async function RecoMovies() {
     ));
 }
 
-export const metadata : Metadata={
+export const metadata: Metadata = {
     title: "두입 씨네마",
-    description : "두입 씨네마에 등록된 영화를 만나보세요~!",
-    openGraph:{
-        title:"두입 씨네마",
+    description: "두입 씨네마에 등록된 영화를 만나보세요~!",
+    openGraph: {
+        title: "두입 씨네마",
         description: "두입 씨네마에 등록된 영화를 만나보세요~!",
-        images: ["/thumbnail.png"],
-    }
-}
+        images: [
+            {
+                url: "/thumbnail.png",
+                alt: "두입 씨네마 썸네일 이미지"
+            }
+        ],
+    },
+};
 
 export default function Home() {
     return (
         <div className={style.container}>
             <section>
-                <h3>지금 추천하는 도서</h3>
+                <h3>지금 추천하는 영화</h3>
                 <div className={style.reco_container}>
                     <Suspense fallback={<MovieListSkeleton count={3} />}>
                         <RecoMovies />
@@ -60,7 +65,7 @@ export default function Home() {
                 </div>
             </section>
             <section>
-                <h3>등록된 모든 도서</h3>
+                <h3>등록된 모든 영화</h3>
                 <div className={style.all_container}>
                     <Suspense fallback={<MovieListSkeleton count={30} />}>
                         <AllMovies />
